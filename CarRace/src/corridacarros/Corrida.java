@@ -66,7 +66,7 @@ public class Corrida {
                     int espera = (int) (Math.random() * Espera);
                     actual = Car.getLocation().getX();
                     int nova = (int) actual + 10;
-                    Car.setLocation(nova, 5);
+                    Car.setLocation(nova, 0);
                     Car.repaint();
 		    try {
 		         sleep(espera);
@@ -159,7 +159,13 @@ public class Corrida {
 
            do{
                correcto = true;
-               nome = JOptionPane.showInputDialog(janela, "Introduz o Nome do Condutor do Carro "+i, "Configuração do Carro "+i, JOptionPane.QUESTION_MESSAGE);
+               try{
+                nome = JOptionPane.showInputDialog(janela, "Introduz o Nome do Condutor do Carro "+i, "Configuração do Carro "+i, JOptionPane.QUESTION_MESSAGE);
+                if(nome.isEmpty())
+                    nome = "Condutor "+i;
+               }catch(NullPointerException e){
+                   nome = "Condutor "+i;
+               }
 
                for(int n = 0; n<Carros.size();n++){
 
@@ -193,8 +199,8 @@ public class Corrida {
         fundo.setLayout(new BorderLayout());
         Conf_Corrida();
 
-        altura = 100+(n_carros*20);
-        largura = 50+distancia;
+        altura = 100+(n_carros*15);
+        largura = 55+distancia;
 
         int location_Y = (int) (dim.getHeight() / 2 - altura / 2);
         int location_X = (int) (dim.getWidth() / 2 - largura / 2);
